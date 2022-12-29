@@ -9,9 +9,7 @@ import ModernRIBs
 import UIKit
 
 protocol CardOnFileDashboardPresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
+    func didTapAddPaymentMethod()
 }
 
 final class CardOnFileDashboardViewController: UIViewController, CardOnFileDashboardPresentable, CardOnFileDashboardViewControllable {
@@ -93,6 +91,7 @@ final class CardOnFileDashboardViewController: UIViewController, CardOnFileDashb
             cardOnFileStackView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 10),
             cardOnFileStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             cardOnFileStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            cardOnFileStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
             
             addMethodButton.heightAnchor.constraint(equalToConstant: 50),
         ])
@@ -109,7 +108,7 @@ final class CardOnFileDashboardViewController: UIViewController, CardOnFileDashb
         
         cardOnFileStackView.addArrangedSubview(addMethodButton) 
         
-        let heightConstraints = views.map { $0.heightAnchor.constraint(equalToConstant: 50) }
+        let heightConstraints = views.map { $0.heightAnchor.constraint(equalToConstant: 45) }
         NSLayoutConstraint.activate(heightConstraints)
     }
     
@@ -120,7 +119,7 @@ final class CardOnFileDashboardViewController: UIViewController, CardOnFileDashb
     
     @objc
     private func addButtonDidTap() {
-        
+        listener?.didTapAddPaymentMethod()
     }
     
 }
