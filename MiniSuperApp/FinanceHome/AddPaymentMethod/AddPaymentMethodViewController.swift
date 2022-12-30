@@ -1,10 +1,3 @@
-//
-//  AddPaymentMethodViewController.swift
-//  MiniSuperApp
-//
-//  Created by 이든_장진혁 on 2022/12/29.
-//
-
 import ModernRIBs
 import UIKit
 
@@ -71,9 +64,10 @@ final class AddPaymentMethodViewController: UIViewController, AddPaymentMethodPr
         return textField
     }
     
-    init() {
+    init(closeButtonType: DismissButtonType) {
         super.init(nibName: nil, bundle: nil)
         
+        setupNavigationItem(with: closeButtonType, target: self, action: #selector(didTapClose))
         setupViews()
     }
     
@@ -83,8 +77,6 @@ final class AddPaymentMethodViewController: UIViewController, AddPaymentMethodPr
     
     private func setupViews() {
         title = "카드추가"
-        
-        setupNavigationItem(with: .close, target: self, action: #selector(didTapClose))
         
         view.backgroundColor = .backgroundColor
         view.addSubview(cardNumberTextField)

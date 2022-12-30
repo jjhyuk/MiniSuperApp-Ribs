@@ -41,13 +41,18 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
         }
     }
     
-    func attachAddPaymentMethod() {
+    func attachAddPaymentMethod(closeButtonType: DismissButtonType) {
         if addPayemntMethodRouting != nil {
             return
         }
         
-        let router = addPaymentMethodBuildable.build(withListener: interactor)
-        presentInsideNavigation(router.viewControllable)
+        let router = addPaymentMethodBuildable.build(withListener: interactor, closeButtonType: closeButtonType)
+        
+        if let navigationControllable = navigationControllable {
+            navigationControllable.pushViewController(router.viewControllable, animated: true)
+        } else {
+            presentInsideNavigation(router.viewControllable)
+        }
         
         attachChild(router)
         addPayemntMethodRouting = router
@@ -58,7 +63,7 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
             return
         }
         
-        dismissPresentedNavigation(completion: nil)
+        navigationControllable?.popViewController(animated: true)
         detachChild(router)
         addPayemntMethodRouting = nil
     }
@@ -69,7 +74,14 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
         }
         
         let router = enterAmountBuildable.build(withListener: interactor)
-        presentInsideNavigation(router.viewControllable)
+        
+        if let navigation = navigationControllable {
+            navigation.setViewControllers([router.viewControllable])
+            resetChildRouting()
+        } else {
+            presentInsideNavigation(router.viewControllable)
+        }
+        
         attachChild(router)
         enterAmountRouting = router
     }
@@ -120,6 +132,23 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
         navigationControllable?.popViewController(animated: true)
         detachChild(router)
         cardOnFileRouting = nil
+    }
+    
+    private func resetChildRouting() {
+        if let cardOnFileRouting {
+            detachChild(cardOnFileRouting)
+            self.cardOnFileRouting = nil
+        }
+        
+        if let addPayemntMethodRouting {
+            detachChild(addPayemntMethodRouting)
+            self.addPayemntMethodRouting = nil
+        }
+    }
+    
+    func popRoot() {
+        navigationControllable?.popToRoot(animated: true)
+        resetChildRouting()
     }
 
     // MARK: - Private

@@ -1,10 +1,3 @@
-//
-//  SuperPayDashBoardBuilder.swift
-//  MiniSuperApp
-//
-//  Created by 이든_장진혁 on 2022/12/29.
-//
-
 import ModernRIBs
 import Foundation
 

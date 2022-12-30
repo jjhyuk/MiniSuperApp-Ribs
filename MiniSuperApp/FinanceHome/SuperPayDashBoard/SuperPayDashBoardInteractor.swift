@@ -43,11 +43,13 @@ final class SuperPayDashBoardInteractor: PresentableInteractor<SuperPayDashBoard
     override func didBecomeActive() {
         super.didBecomeActive()
         
-        dependency.balance.sink { [weak self] balance in
-            self?.dependency.balanceFormatter.string(from: NSNumber(value: balance))
-                .map { self?.presenter.updateBalance(String($0)) }
-        }
-        .store(in: &cancellables)
+        dependency.balance
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] balance in
+                self?.dependency.balanceFormatter.string(from: NSNumber(value: balance))
+                    .map { self?.presenter.updateBalance(String($0)) }
+            }
+            .store(in: &cancellables)
     }
 
     override func willResignActive() {

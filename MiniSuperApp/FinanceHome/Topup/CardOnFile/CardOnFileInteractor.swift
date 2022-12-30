@@ -1,10 +1,3 @@
-//
-//  CardOnFileInteractor.swift
-//  MiniSuperApp
-//
-//  Created by 이든_장진혁 on 2022/12/31.
-//
-
 import ModernRIBs
 
 protocol CardOnFileRouting: ViewableRouting {
