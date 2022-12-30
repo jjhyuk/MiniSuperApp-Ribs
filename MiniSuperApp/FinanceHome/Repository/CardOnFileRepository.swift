@@ -21,7 +21,7 @@ final class CardOnFileRepositoryImp: CardOnFileRepository {
             id: "00",
             name: "New Card",
             digits: "\(info.number.suffix(4))",
-            color: "",
+            color: "", 
             isPrimary: false
         )
         

@@ -1,10 +1,3 @@
-//
-//  SuperPayDashBoardInteractor.swift
-//  MiniSuperApp
-//
-//  Created by 이든_장진혁 on 2022/12/29.
-//
-
 import ModernRIBs
 import Combine
 import Foundation
@@ -20,7 +13,7 @@ protocol SuperPayDashBoardPresentable: Presentable {
 }
 
 protocol SuperPayDashBoardListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func superPayDashboardDidTapTopup()
 }
 
 protocol SuperPayDashBoardInteractorDependency {
@@ -60,5 +53,9 @@ final class SuperPayDashBoardInteractor: PresentableInteractor<SuperPayDashBoard
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+    
+    func topupButtonDidTap() {
+        listener?.superPayDashboardDidTapTopup()
     }
 }
