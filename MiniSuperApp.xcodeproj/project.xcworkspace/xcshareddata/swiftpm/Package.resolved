@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/CombineCommunity/CombineExt.git",
       "state" : {
-        "revision" : "d7b896fa9ca8b47fa7bcde6b43ef9b70bf8c1f56",
-        "version" : "1.8.1"
+        "revision" : "8ca006df5e3cc6bb176b70238e2b0014bbc3a235",
+        "version" : "1.0.0"
       }
     },
     {
